@@ -1,0 +1,19 @@
+.header{:style => 'display:flex; justify-content: center;'}
+    %h3 Todo List App
+
+.container-fluid
+    .col-lg-12 
+        .row 
+            - @todos.each do |todo|
+                .col-lg-3{:style => todo.completed ? 'color: green; text-decoration: line-through': 'color: red'}
+                    = todo.name
+                .col-lg-3
+                    - if todo.completed == true
+                        Completed
+                    - else 
+                        Not Completed
+                .col-lg-3
+                    = link_to "Edit", edit_todo_path(todo), class: "btn"
+                .col-lg-3
+                    = link_to "Delete", todo_path(todo), method: 'delete', data:{confirm: 'Are you sure?'}, class: 'btn'
+        = link_to "Add new todo", new_todo_path, class: "btn btn-success"
